@@ -82,3 +82,25 @@ h2 {
     font-family: 'lucida handwriting', cursive;
     font-size: medium;
 }
+
+
+.api {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 2%;
+    border-radius: 8px;
+    padding: 20px; /* Belső távolság */
+    background-color: #f9f9f9;
+    max-width: 500px; /* Maximum szélesség */
+    margin: auto; /* Középre igazítás */
+}
+
+.cimi {
+    background-color:rgba(214, 208, 93, 0.763) ;
+    border-radius: 8px;
+    background-size: 50px;
+    text-align: center;
+    font-family: "lucida handwriting", cursive;
+    font-size: medium;
+}
+

@@ -1,24 +1,27 @@
-// Az API kulcsod
-const apiKey = 'cbbcef00cf069a4ddf42c13d6f000ace';
-const city = 'Budapest'; // Változtasd meg a várost, ha szükséges
+document.getElementById('getWeather').addEventListener('click', function() {
+  const city = document.getElementById('city').value;
+  const apiKey = '72c560da35b01f7640efbe958b00ceb9'; // Cseréld le a saját API kulcsodra
 
-// Az API URL
-const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-
-// Lekérés az API-tól
-fetch(url)
+  // API hívás az időjárás adatainak lekérdezésére
+  fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`)
   .then(response => {
-    if (!response.ok) {
-      throw new Error('Hiba történt az időjárás adatainak lekérésekor');
-    }
-    return response.json();
-  })
-  .then(data => {
-    console.log(data);
-    const temperature = data.main.temp;
-    const weatherDescription = data.weather[0].description;
-    console.log(`Jelenlegi hőmérséklet: ${temperature}°C, időjárás: ${weatherDescription}`);
-  })
-  .catch(error => {
-    console.error('Hiba:', error);
-  });
+          if (!response.ok) {
+              throw new Error('Hiba történt az adatok lekérdezésekor!');
+          }
+          return response.json();
+      })
+      .then(data => {
+          const weatherInfo = `
+              Város: ${data.name}
+              Időjárás: ${data.weather[0].description}
+              Hőmérséklet: ${data.main.temp.toFixed(1)} °C
+              Szélsebesség: ${data.wind.speed.toFixed(1)} km/h
+              Páratartalom: ${data.main.humidity} %
+          `;
+          document.getElementById('weatherResult').innerText = weatherInfo;
+      })
+      .catch(error => {
+          console.error('Hiba történt:', error);
+          document.getElementById('weatherResult').innerText = 'Város nem található vagy hiba történt.';
+      });
+});
